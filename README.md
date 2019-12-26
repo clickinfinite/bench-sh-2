@@ -1,3 +1,5 @@
+#THIS IS NO LONGER MAINTAINED!
+<br /><br />
 # bench-sh-2
 Benchmark Script Version 2<br /><br />
 Demo Output: http://pastebin.com/zqtBpZDU<br /><br /><br />
