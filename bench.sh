@@ -140,12 +140,43 @@ iotest () {
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
 	io2=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
 	io3=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
-	# Calculating avg I/O (better approach with awk for non int values)
+	# I/O without units for calculation (better approach with awk for non int values)
 	ioraw=$( echo $io | awk 'NR==1 {print $1}' )
 	ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
 	ioraw3=$( echo $io3 | awk 'NR==1 {print $1}' )
-	ioall=$( awk 'BEGIN{print '$ioraw' + '$ioraw2' + '$ioraw3'}' )
+	# Converting possible GB/s results to MB/s value for proper calculation afterwards
+	iounit=$( echo $io | awk 'NR==1 {print $2}' )
+	iounit2=$( echo $io2 | awk 'NR==1 {print $2}' )
+	iounit3=$( echo $io3 | awk 'NR==1 {print $2}' )
+	# Converting 1st benchmark run
+	if [ "$iounit" == "GB/s" ]
+	then
+        	ioconv=$( bc -l <<<"($ioraw * 1000)/1" )
+        	ioconv=$( echo ${ioconv%.*} )
+	else
+        	ioconv=$ioraw
+	fi
+	# Converting 2nd benchmark run
+	if [ "$iounit2" == "GB/s" ]
+	then
+        	ioconv2=$( bc -l <<<"($ioraw2 * 1000)" )
+        	ioconv2=$( echo ${ioconv2%.*} ) 
+	else
+        	ioconv2=$ioraw2
+	fi
+	# Converting 3rd benchmark run
+	if [ "$iounit3" == "GB/s" ]
+	then
+        	ioconv3=$( bc -l <<<"($ioraw3 * 1000)/1" )
+        	ioconv3=$( echo ${ioconv3%.*} )
+	else
+        	ioconv3=$ioraw3
+	fi
+	# Calculating all IO results and avg IO
+	ioall=$( awk 'BEGIN{print '$ioconv' + '$ioconv2' + '$ioconv3'}' )
+	ioall=$( echo ${ioall%.*} )
 	ioavg=$( awk 'BEGIN{print '$ioall'/3}' )
+	ioavg=$( echo ${ioavg%.*} )
 	# Output of DD result
 	echo "I/O (1st run)	: $io" | tee -a $HOME/bench.log
 	echo "I/O (2nd run)	: $io2" | tee -a $HOME/bench.log
