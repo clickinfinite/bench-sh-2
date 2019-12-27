@@ -152,7 +152,7 @@ iotest () {
 	# Converting 1st benchmark run
 	if [ "$iounit" == "GB/s" ]
 	then
-        	ioconv=$( bc -l <<<"($ioraw * 1000)/1" )
+        	ioconv=$( bc -l <<<"($ioraw * 1000)" )
         	ioconv=$( echo ${ioconv%.*} )
 	else
         	ioconv=$ioraw
@@ -168,7 +168,7 @@ iotest () {
 	# Converting 3rd benchmark run
 	if [ "$iounit3" == "GB/s" ]
 	then
-        	ioconv3=$( bc -l <<<"($ioraw3 * 1000)/1" )
+        	ioconv3=$( bc -l <<<"($ioraw3 * 1000)" )
         	ioconv3=$( echo ${ioconv3%.*} )
 	else
         	ioconv3=$ioraw3
