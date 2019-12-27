@@ -134,6 +134,7 @@ speedtest6 () {
 	echo "" | tee -a $HOME/bench.log
 }
 iotest () {
+	command -v bc >/dev/null 2>&1 || { echo >&2 "The I/O benchmark requires bc but it's not installed. Please install bc and repeat. Aborting..."; exit 1; }
 	echo "Disk Speed" | tee -a $HOME/bench.log
 	echo "----------" | tee -a $HOME/bench.log
 	# Measuring disk speed with DD
