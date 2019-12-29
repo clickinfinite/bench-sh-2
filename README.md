@@ -1,6 +1,6 @@
 # bench-sh-2
 Benchmark Script Version 2<br /><br />
-Demo Output: http://pastebin.com/zqtBpZDU<br /><br /><br />
+Demo Output: https://pastebin.com/8aLt2Zps<br /><br /><br />
 <strong>Parameters</strong><br /><br />
 Help Page:<br />
 <code>./bench.sh -h</code><br />
@@ -8,15 +8,15 @@ or<br />
 <code>./bench.sh ?</code><br /><br />
 System Info + Speedtest IPv4 + Drive Speed:<br />
 <code>./bench.sh</code><br />
-Classic mode. This will use 1 GB bandwidth!<br /><br />
+Classic mode.<br /><br />
 System Info + Speedtest IPv6 + Drive Speed:<br />
 <code>./bench.sh -6</code><br />
-IPv6 only speed test. This will use 1 GB bandwidth!<br /><br />
+IPv6 only speed test.<br /><br />
 System Info + Speedtest IPv4 & IPv6 + Drive Speed:<br />
 <code>./bench.sh -46</code><br />
 or<br />
 <code>./bench.sh -64</code><br />
-Dual stack speed test. This will use 2 GB bandwidth!<br /><br />
+Dual stack speed test.<br /><br />
 System Info:<br />
 <code>./bench.sh -sys</code><br />
 System information only.<br /><br />
