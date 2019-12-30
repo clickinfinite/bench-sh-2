@@ -121,31 +121,45 @@ speedtest6 () {
   	echo "Your public IPv6 is $ipvii" | tee -a $HOME/bench.log
   	echo "" | tee -a $HOME/bench.log
   	echo "Location		Provider	Speed" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "United States" | tee -a $HOME/bench.log
   	# United States speed test
 	v6atl=$( wget -6 -O /dev/null http://[2602:fff6:3::4:4]/100MB.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	v6atlp=$( ping6 2602:fff6:3::4:4 -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Atlanta, GA, US		QuadraNET	$v6atl" | tee -a $HOME/bench.log
   	v6dal=$( wget -6 -O /dev/null http://speedtest.dallas.linode.com/100MB-dallas.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Dallas, TX, US		Linode		$v6dal" | tee -a $HOME/bench.log
+  	v6dalp=$( ping6 speedtest.dallas.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Dallas, TX, US		Linode		$v6dal" | tee -a $HOME/bench.log
   	v6new=$( wget -6 -O /dev/null http://speedtest.newark.linode.com/100MB-newark.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Newark, NJ, US		Linode	 	$v6new" | tee -a $HOME/bench.log
+  	v6newp=$( ping6 speedtest.newark.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Newark, NJ, US		Linode	 	$v6new" | tee -a $HOME/bench.log
 	v6fre=$( wget -6 -O /dev/null http://speedtest.fremont.linode.com/100MB-fremont.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	v6frep=$( ping6 speedtest.fremont.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Fremont, CA, US		Linode	 	$v6fre" | tee -a $HOME/bench.log
   	v6chi=$( wget -6 -O /dev/null http://testfile.chi.steadfast.net/data.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Chicago, IL, US		Steadfast	$v6chi" | tee -a $HOME/bench.log
+  	v6chip=$( ping6 testfile.chi.steadfast.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Chicago, IL, US		Steadfast	$v6chi" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+	echo "Asia" | tee -a $HOME/bench.log
 	# Asia speed test
   	v6tok=$( wget -6 -O /dev/null http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Tokyo, Japan		Linode	 	$v6tok" | tee -a $HOME/bench.log
+  	v6tokp=$( ping6 speedtest.tokyo2.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Tokyo, Japan		Linode	 	$v6tok" | tee -a $HOME/bench.log
   	v6sin=$( wget -6 -O /dev/null http://speedtest.singapore.linode.com/100MB-singapore.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-  	echo "Singapore		Linode		$v6sin" | tee -a $HOME/bench.log
+  	v6sinp=$( ping6 speedtest.singapore.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Singapore		Linode		$v6sin" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+	echo "Europe" | tee -a $HOME/bench.log
 	# Europe speed test
 	v6fra=$( wget -6 -O /dev/null http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	v6frap=$( ping6 speedtest.frankfurt.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Frankfurt, Germany	Linode		$v6fra" | tee -a $HOME/bench.log
         v6lon=$( wget -6 -O /dev/null http://speedtest.london.linode.com/100MB-london.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	v6lonp=$( ping6 speedtest.london.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "London, UK		Linode		$v6lon" | tee -a $HOME/bench.log
         v6har=$( wget -6 -O /dev/null http://mirror.nl.leaseweb.net/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-        echo "Haarlem, Netherlands	Leaseweb	$v6har" | tee -a $HOME/bench.log
+        v6harp=$( ping6 mirror.nl.leaseweb.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Haarlem, Netherlands	Leaseweb	$v6har" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
