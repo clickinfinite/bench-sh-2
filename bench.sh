@@ -66,33 +66,49 @@ speedtest4 () {
 	echo "" | tee -a $HOME/bench.log
 	# Cachefly CDN speed test
 	echo "Location		Provider	Speed"	| tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Global" | tee -a $HOME/bench.log
 	cachefly=$( wget -4 -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	cacheflyp=$( ping cachefly.cachefly.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "CDN			Cachefly	$cachefly" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+	echo "United States" | tee -a $HOME/bench.log
 	# United States speed test
 	coloatatl=$( wget -4 -O /dev/null http://speed.atl.coloat.com/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	coloatatlp=$( ping speed.atl.coloat.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Atlanta, GA, US		Coloat		$coloatatl " | tee -a $HOME/bench.log
 	sldltx=$( wget -4 -O /dev/null http://speedtest.dal05.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	sldltxp=$( ping speedtest.dal05.softlayer.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Dallas, TX, US		Softlayer	$sldltx " | tee -a $HOME/bench.log
 	slwa=$( wget -4 -O /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	slwap=$( ping speedtest.sea01.softlayer.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Seattle, WA, US		Softlayer	$slwa " | tee -a $HOME/bench.log
 	slsjc=$( wget -4 -O /dev/null http://speedtest.sjc01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	slsjcp=$( ping speedtest.sjc01.softlayer.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "San Jose, CA, US	Softlayer	$slsjc " | tee -a $HOME/bench.log
 	slwdc=$( wget -4 -O /dev/null http://mirror.wdc1.us.leaseweb.net/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	slwdcp=$( ping mirror.wdc1.us.leaseweb.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Washington, DC, US	Leaseweb 	$slwdc " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+	echo "Asia" | tee -a $HOME/bench.log
 	# Asia speed test
 	linodejp=$( wget -4 -O /dev/null http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	linodejpp=$( ping speedtest.tokyo2.linode.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Tokyo, Japan		Linode		$linodejp" | tee -a $HOME/bench.log
 	slsg=$( wget -4 -O /dev/null http://speedtest.sng01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	slsgp=$( ping speedtest.sng01.softlayer.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Singapore 		Softlayer	$slsg" | tee -a $HOME/bench.log
 	hitw=$( wget -4 -O /dev/null http://tpdb.speed2.hinet.net/test_100m.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' ) 
+	hitwp=$( ping tpdb.speed2.hinet.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Taiwan                  Hinet           $hitw" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+	echo "Europe" | tee -a $HOME/bench.log
 	# Europe speed test
 	i3d=$( wget -4 -O /dev/null http://mirror.i3d.net/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	i3dp=$( ping mirror.i3d.net -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Rotterdam, Netherlands	id3.net		$i3d" | tee -a $HOME/bench.log
 	leaseweb=$( wget -4 -O /dev/null http://mirror.leaseweb.com/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	leasewebp=$( ping mirror.leaseweb.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Haarlem, Netherlands	Leaseweb	$leaseweb" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
