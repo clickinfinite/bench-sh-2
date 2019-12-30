@@ -23,6 +23,7 @@ sysinfo () {
 	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
 	# Reading CPU frequency in MHz
 	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+	freq=$( echo ${freq%.*} )
 	# Reading total memory in MB
 	tram=$( free -m | awk 'NR==2 {print $2}' )
 	# Reading Swap in MB
@@ -44,8 +45,7 @@ sysinfo () {
 	echo "System Info" | tee -a $HOME/bench.log
 	echo "-----------" | tee -a $HOME/bench.log
 	echo "Processor	: $cname" | tee -a $HOME/bench.log
-	echo "CPU Cores	: $cores" | tee -a $HOME/bench.log
-	echo "Frequency	: $freq MHz" | tee -a $HOME/bench.log
+	echo "CPU Cores	: $cores @ $freq MHz" | tee -a $HOME/bench.log
 	echo "Memory		: $tram MB" | tee -a $HOME/bench.log
 	echo "Swap		: $vram MB" | tee -a $HOME/bench.log
 	echo "Uptime		: $up" | tee -a $HOME/bench.log
