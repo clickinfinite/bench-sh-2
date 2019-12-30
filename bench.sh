@@ -65,7 +65,7 @@ speedtest4 () {
 	echo "Your public IPv4 is $ipiv" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Cachefly CDN speed test
-	echo "Location		Provider	Speed	Latency" | tee -a $HOME/bench.log
+	echo "Location		Provider	Speed		Latency" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "Global" | tee -a $HOME/bench.log
 	cachefly=$( wget -4 -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -120,7 +120,7 @@ speedtest6 () {
   	echo "---------------------" | tee -a $HOME/bench.log
   	echo "Your public IPv6 is $ipvii" | tee -a $HOME/bench.log
   	echo "" | tee -a $HOME/bench.log
-  	echo "Location		Provider	Speed	Latency" | tee -a $HOME/bench.log
+  	echo "Location		Provider	Speed		Latency" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "United States" | tee -a $HOME/bench.log
   	# United States speed test
