@@ -74,9 +74,9 @@ speedtest4 () {
 	echo "" | tee -a $HOME/bench.log
 	echo "United States" | tee -a $HOME/bench.log
 	# United States speed test
-	coloatatl=$( wget -4 -O /dev/null http://speed.atl.coloat.com/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	coloatatlp=$( ping speed.atl.coloat.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
-	echo "Atlanta, GA, US		Coloat		$coloatatl 	$coloatatlp ms" | tee -a $HOME/bench.log
+	dacenl=$( wget -4 -O /dev/null http://mirror.dacentec.com/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	dacenlp=$( ping mirror.dacentec.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
+	echo "Lenoir, NC, US		Dacentec	$dacenl 	$dacenlp ms" | tee -a $HOME/bench.log
 	sldltx=$( wget -4 -O /dev/null http://speedtest.dal05.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
 	sldltxp=$( ping speedtest.dal05.softlayer.com -c 4 | awk -F\/ '/rtt/ {print $5}' )
 	echo "Dallas, TX, US		Softlayer	$sldltx 	$sldltxp ms" | tee -a $HOME/bench.log
