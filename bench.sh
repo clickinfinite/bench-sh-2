@@ -71,7 +71,7 @@ speedtest4 () {
 	echo "" | tee -a $HOME/bench.log
 	# United States speed test
 	dacenl=$( wget -4 -O /dev/null http://mirror.dacentec.com/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Lenoir, NC, US		Dacentec		$dacenl " | tee -a $HOME/bench.log
+	echo "Lenoir, NC, US		Dacentec	$dacenl " | tee -a $HOME/bench.log
 	sldltx=$( wget -4 -O /dev/null http://speedtest.dal05.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
 	echo "Dallas, TX, US		Softlayer	$sldltx " | tee -a $HOME/bench.log
 	slwa=$( wget -4 -O /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
